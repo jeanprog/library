@@ -18,6 +18,6 @@ export class AuthorService implements AuthorGateway {
     return this.authorRepository.updateAuthor(id, author);
   }
   deleteAuthor(id: number): Observable<void> {
-    throw new Error('Method not implemented.');
+    return this.authorRepository.deleteAuthor(id);
   }
 }

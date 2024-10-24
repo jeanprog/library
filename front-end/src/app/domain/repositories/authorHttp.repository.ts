@@ -23,6 +23,7 @@ export class AuthorHttpRepository implements AuthorGateway {
     return this.http.patch<Author>(this.apiUrl + 'authors/' + id, author);
   }
   deleteAuthor(id: number): Observable<void> {
-    throw new Error('Method not implemented.');
+    const sId = id.toString();
+    return this.http.delete<void>(this.apiUrl + 'authors/' + sId);
   }
 }
