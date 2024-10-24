@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { AuthorService } from './domain/services/author.service';
 import { Author } from './domain/entities/author';
 import { AuthorListComponent } from './components/author-list/author-list.component';
+import { FormsAuthorComponent } from './components/forms-author/forms-author.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AuthorListComponent],
+  imports: [RouterOutlet, AuthorListComponent, FormsAuthorComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'], // Corrigido de styleUrl para styleUrls
 })
@@ -26,5 +27,9 @@ export class AppComponent {
         }
       },
     });
+  }
+
+  handleFormSubmit(formData: Author) {
+    console.log('Data received from child:', formData);
   }
 }
