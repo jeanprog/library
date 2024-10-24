@@ -55,12 +55,28 @@ export class AppComponent {
   }
 
   handleFormSubmitAuthor(author: Author) {
-    console.log('Data received from child:', author);
-    this.authorService.createAuthor(author).subscribe({
-      next: () => {
-        this.listAllAuthor();
-      },
-    });
+    if (this.authorUpdate) {
+      const id = Number(this.authorUpdate.id);
+      const authorFormated = {
+        ...author,
+        id: id,
+      };
+      console.log(authorFormated, 'cai aqui');
+
+      this.authorService.updateAuthor(id, authorFormated).subscribe({
+        next: (result: Author) => {
+          console.log('alterado com sucesso', result);
+          this.getAllbooks();
+        },
+      });
+    } else {
+      this.authorService.createAuthor(author).subscribe({
+        next: (result: Author) => {
+          console.log('cadastrado com sucesso', result);
+          this.getAllbooks();
+        },
+      });
+    }
   }
 
   handleFormSubmitBook(book: Book) {

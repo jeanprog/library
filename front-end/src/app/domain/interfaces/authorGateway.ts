@@ -6,7 +6,7 @@ export default interface AuthorGateway {
 
   listAllAuthors(): Observable<Author[]>;
 
-  updateAuthor(id: number): Observable<Author>;
+  updateAuthor(id: number, author: Author): Observable<Author>;
 
   deleteAuthor(id: number): Observable<void>;
 }

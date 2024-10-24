@@ -14,8 +14,8 @@ export class AuthorService implements AuthorGateway {
   listAllAuthors(): Observable<Author[]> {
     return this.authorRepository.listAllAuthors();
   }
-  updateAuthor(id: number): Observable<Author> {
-    throw new Error('Method not implemented.');
+  updateAuthor(id: number, author: Author): Observable<Author> {
+    return this.authorRepository.updateAuthor(id, author);
   }
   deleteAuthor(id: number): Observable<void> {
     throw new Error('Method not implemented.');

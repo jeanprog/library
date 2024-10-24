@@ -6,7 +6,7 @@ import { Author } from './entities/author.entity';
 
 @Injectable()
 export class AuthorsService {
-  constructor(private readonly authorRepository: AuthorRepository) { }
+  constructor(private readonly authorRepository: AuthorRepository) {}
   async create(createAuthorDto: CreateAuthorDto): Promise<Author> {
     return this.authorRepository.createAuthor(createAuthorDto);
   }
@@ -19,8 +19,8 @@ export class AuthorsService {
     return `This action returns a #${id} author`;
   }
 
-  update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    return `This action updates a #${id} author`;
+  update(id: number, updateAuthorDto: Author) {
+    return this.findOne(id);
   }
 
   remove(id: number) {

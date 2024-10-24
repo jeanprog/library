@@ -19,8 +19,8 @@ export class AuthorHttpRepository implements AuthorGateway {
   listAllAuthors(): Observable<Author[]> {
     return this.http.get<Author[]>(this.apiUrl + 'authors');
   }
-  updateAuthor(id: number): Observable<Author> {
-    throw new Error('Method not implemented.');
+  updateAuthor(id: number, author: Author): Observable<Author> {
+    return this.http.patch<Author>(this.apiUrl + 'authors/' + id, author);
   }
   deleteAuthor(id: number): Observable<void> {
     throw new Error('Method not implemented.');
