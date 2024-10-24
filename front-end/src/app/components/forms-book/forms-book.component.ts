@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +15,7 @@ import {
 import { Author } from '../../domain/entities/author';
 import { NgFor } from '@angular/common';
 import { Book } from '../../domain/entities/book';
+import { formatDateToYYYYMMDD } from '../../../utils/helpers';
 
 @Component({
   selector: 'app-book-form',
@@ -15,10 +23,12 @@ import { Book } from '../../domain/entities/book';
   imports: [ReactiveFormsModule, NgFor],
   templateUrl: './forms-book.component.html',
 })
-export class BookFormComponent implements OnInit {
+export class BookFormComponent {
   bookForm: FormGroup;
   @Input() authors: Author[] = [];
+  @Input() book: Book | null = null;
   @Output() formSubmit = new EventEmitter<any>();
+  updateTemplate: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.bookForm = this.fb.group({
@@ -28,7 +38,19 @@ export class BookFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['book'] && changes['book'].currentValue) {
+      this.populateForm(changes['book'].currentValue);
+      this.updateTemplate = true;
+    }
+  }
+  populateForm(book: Book) {
+    this.bookForm.patchValue({
+      title: book.title,
+      publicationDate: formatDateToYYYYMMDD(new Date(book.publicationDate)),
+      author: book.author.id, // Setar o ID do autor
+    });
+  }
 
   onSubmit() {
     if (this.bookForm.valid) {

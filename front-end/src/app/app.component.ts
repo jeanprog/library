@@ -30,6 +30,7 @@ export class AppComponent {
 
   authors: Author[] = [];
   booksAuthor: Book[] = [];
+  bookUpdate!: Book;
 
   ngOnInit() {
     this.getAllbooks();
@@ -49,13 +50,40 @@ export class AppComponent {
     console.log('Data received from child:', formData);
   }
   handleFormSubmitBook(book: Book) {
-    console.log(book);
-    this.bookService.createBook(book).subscribe({
+    if (this.bookUpdate) {
+      const id = Number(this.bookUpdate.id);
+      const bookFormated = {
+        ...book,
+        id: id,
+      };
+      console.log(bookFormated);
+      this.bookService.updateBook(id, bookFormated).subscribe({
+        next: (result: Book) => {
+          console.log('alterado com sucesso', result);
+          this.getAllbooks();
+        },
+      });
+    } else {
+      this.bookService.createBook(book).subscribe({
+        next: (result: Book) => {
+          console.log('cadastrado com sucesso', result);
+          this.getAllbooks();
+        },
+      });
+    }
+  }
+
+  handleUpdateSubmitBook(id: number, book: Book) {
+    this.bookService.updateBook(id, book).subscribe({
       next: (result: Book) => {
-        console.log('cadastrado com sucesso', result);
-        this.getAllbooks();
+        console.log('ATUALIZADO COM SUCESSO', result);
       },
     });
+  }
+
+  onUpdateBook(book: Book) {
+    this.bookUpdate = book;
+    console.log('evento chegou até aqui', this.bookUpdate);
   }
 
   getAllbooks() {

@@ -19,8 +19,8 @@ export class BookService implements BookGateway {
   listBooksOfAuthors(id: number): Observable<Book[]> {
     return this.bookRepository.listBooksOfAuthors(id);
   }
-  updateBook(id: number): Observable<Author> {
-    throw new Error('Method not implemented.');
+  updateBook(id: number, book: Partial<Book>): Observable<Book> {
+    return this.bookRepository.updateBook(id, book);
   }
   deleteBook(id: number): Observable<void> {
     throw new Error('Method not implemented.');

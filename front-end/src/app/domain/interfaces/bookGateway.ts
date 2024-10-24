@@ -9,7 +9,7 @@ export default interface BookGateway {
 
   listBooksOfAuthors(id: number): Observable<Book[]>;
 
-  updateBook(id: number): Observable<Author>;
+  updateBook(id: number, book: Partial<Book>): Observable<Book>;
 
   deleteBook(id: number): Observable<void>;
 }

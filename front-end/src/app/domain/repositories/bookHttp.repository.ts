@@ -22,8 +22,8 @@ export class BooksHttpRepository implements BookGateway {
     const sId = id.toString();
     return this.http.get<Book[]>(this.apiUrl + 'books/' + 'author/' + sId);
   }
-  updateBook(id: number): Observable<Author> {
-    throw new Error('Method not implemented.');
+  updateBook(id: number, book: Partial<Book>): Observable<Book> {
+    return this.http.patch<Book>(this.apiUrl + 'books/' + id, book);
   }
   deleteBook(id: number): Observable<void> {
     throw new Error('Method not implemented.');

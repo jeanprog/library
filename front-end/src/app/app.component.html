@@ -12,10 +12,14 @@
   </div>
   <div class="p-4 flex flex-col gap-2">
     <app-book-form
+      [book]="bookUpdate"
       [authors]="authors"
       (formSubmit)="handleFormSubmitBook($event)"
     ></app-book-form>
 
-    <app-books-list [booksAuthor]="booksAuthor"></app-books-list>
+    <app-books-list
+      (updateBooksProps)="onUpdateBook($event)"
+      [booksAuthor]="booksAuthor"
+    ></app-books-list>
   </div>
 </html>

@@ -4,5 +4,18 @@
 >
   <p class="text-lg font-semibold"><strong>Title:</strong> {{ book.title }}</p>
   <p><strong>Publication Date:</strong> {{ book.publicationDate }}</p>
-  {{ book.author.name }}
+  <p><strong>Autor</strong> {{ book.author.name }}</p>
+  <div class="flex gap-2">
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-[12px]"
+      (click)="updateBook(book)"
+    >
+      Editar
+    </button>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-[12px]"
+    >
+      Remover
+    </button>
+  </div>
 </div>
