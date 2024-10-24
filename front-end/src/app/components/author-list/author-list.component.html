@@ -1,11 +1,15 @@
 <div
-  *ngFor="let author of authors"
-  class="p-4 bg-white border border-zinc-300 rounded-lg shadow-md mb-4"
+  *ngFor="let author of authors; let i = index"
+  (click)="toggleSelection(i, author.id)"
+  [ngClass]="{
+    'bg-blue-800 text-white': selectedIndex === i,
+    'bg-white text-slate-600': selectedIndex !== i
+  }"
+  class="p-4 bg-white border border-zinc-300 rounded-lg shadow-md mb-4 hover:bg-blue-800 hover:text-slate-300"
 >
-  <p class="text-lg font-semibold text-gray-800">
-    <strong>Name:</strong> {{ author.name }}
-  </p>
-  <p class="text-gray-600">
-    <strong>Birth Date:</strong> {{ author.birthDate }}
+  <p class="text-lg font-semibold"><strong>Name:</strong> {{ author.name }}</p>
+  <p class="">
+    <strong class="">Birth Date:</strong>
+    {{ author.birthDate }}
   </p>
 </div>

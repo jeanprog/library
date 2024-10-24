@@ -1,0 +1,8 @@
+<div
+  *ngFor="let book of booksAuthor"
+  class="p-4 bg-white border border-zinc-300 rounded-lg shadow-md mb-4"
+>
+  <p class="text-lg font-semibold"><strong>Title:</strong> {{ book.title }}</p>
+  <p><strong>Publication Date:</strong> {{ book.publicationDate }}</p>
+  {{ book.author.name }}
+</div>

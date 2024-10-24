@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './forms-author.component.html',
-  styleUrls: ['./forms-author.component.css'],
 })
 export class FormsAuthorComponent {
   authorForm: FormGroup;
