@@ -13,8 +13,8 @@ export class AuthorHttpRepository implements AuthorGateway {
   constructor(private http: HttpClient) {}
   private apiUrl = environment.apiUrl;
 
-  createAuthor(Author: Author): Observable<Author> {
-    throw new Error('Method not implemented.');
+  createAuthor(author: Author): Observable<Author> {
+    return this.http.post<Author>(this.apiUrl + 'authors', author);
   }
   listAllAuthors(): Observable<Author[]> {
     return this.http.get<Author[]>(this.apiUrl + 'authors');

@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { environment } from '../../environment';
-import { Author } from '../entities/author';
 
 @Injectable({
   providedIn: 'root',

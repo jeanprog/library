@@ -1,12 +1,14 @@
 <html class="flex">
   <div class="w-[50%] flex flex-col gap-2">
     <app-forms-author
-      (formSubmit)="handleFormSubmit($event)"
+      [author]="authorUpdate"
+      (formSubmit)="handleFormSubmitAuthor($event)"
     ></app-forms-author>
 
     <app-author-list
       [authors]="authors"
       (authorSelected)="getBooksAuthor($event)"
+      (authorEvent)="onUpdateAuthor($event)"
       (reload)="getAllbooks()"
     ></app-author-list>
   </div>

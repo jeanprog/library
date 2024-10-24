@@ -8,8 +8,8 @@ import { Injectable } from '@angular/core';
 })
 export class AuthorService implements AuthorGateway {
   constructor(private authorRepository: AuthorHttpRepository) {}
-  createAuthor(Author: Author): Observable<Author> {
-    throw new Error('Method not implemented.');
+  createAuthor(author: Author): Observable<Author> {
+    return this.authorRepository.createAuthor(author);
   }
   listAllAuthors(): Observable<Author[]> {
     return this.authorRepository.listAllAuthors();

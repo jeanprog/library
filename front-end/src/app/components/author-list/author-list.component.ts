@@ -13,6 +13,7 @@ export class AuthorListComponent {
   selectedIndex: number | null = null;
   @Output() authorSelected = new EventEmitter<number>();
   @Output() reload = new EventEmitter<any>();
+  @Output() authorEvent = new EventEmitter<Author>();
 
   toggleSelection(index: number, authorID: number) {
     this.selectedIndex = this.selectedIndex === index ? null : index;
@@ -24,5 +25,10 @@ export class AuthorListComponent {
     } else {
       this.authorSelected.emit(authorID);
     }
+  }
+
+  onEventUpdateAuthor(author: Author) {
+    console.log(author, 'no evento component');
+    this.authorEvent.emit(author);
   }
 }
