@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { Book } from './entities/book.entity';
 
 @Controller('books')
 export class BooksController {
@@ -11,6 +12,10 @@ export class BooksController {
   create(@Body() createBookDto: CreateBookDto) {
     return this.booksService.createBook(createBookDto);
   }
+  @Get('author/:id')
+  async getBooksByAuthor(@Param('id') id: number): Promise<Book[]> {
+    return this.booksService.booksOfAuthor(id);
+  }
 
   @Get()
   findAll() {
@@ -19,12 +24,12 @@ export class BooksController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.booksService.findOne(+id);
+    return this.booksService.findBookById(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateBookDto: UpdateBookDto) {
-    return this.booksService.update(+id, updateBookDto);
+  async update(@Param('id') id: number, @Body() updateBookDto: UpdateBookDto) {
+    return this.booksService.updateBook(+id, updateBookDto);
   }
 
   @Delete(':id')

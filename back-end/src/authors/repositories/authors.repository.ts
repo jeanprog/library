@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Author } from '../entities/author.entity';
 import { CreateAuthorDto } from '../dto/create-author.dto';
+import { Book } from 'src/books/entities/book.entity';
 
 
 @Injectable()
@@ -21,6 +22,8 @@ export class AuthorRepository {
     async findAll(): Promise<Author[]> {
         return this.repository.find(); // Retorna todos os autores
     }
+
+
 
     async deleteAuthor(id: number): Promise<void> {
         await this.repository.delete(id);
