@@ -15,3 +15,4 @@ export class Author {
     @OneToMany(() => Book, (book: Book) => book.author)
     books: Book[];
 }
+

@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { Book } from './entities/book.entity';
+import { BookRepository } from './repositories/books.repository';
 
 @Injectable()
 export class BooksService {
-  create(createBookDto: CreateBookDto) {
-    return 'This action adds a new book';
+
+  constructor(private readonly bookRepository: BookRepository) { }
+
+
+  async createBook(createBookDto: CreateBookDto): Promise<Book> {
+    return this.bookRepository.createBook(createBookDto);
   }
 
   findAll() {
-    return `This action returns all books`;
+    return this.bookRepository.findAll();
   }
 
   findOne(id: number) {
@@ -17,7 +23,7 @@ export class BooksService {
   }
 
   update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+    return this.bookRepository.updateBook(id, updateBookDto);
   }
 
   remove(id: number) {

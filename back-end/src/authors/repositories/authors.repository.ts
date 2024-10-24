@@ -17,6 +17,11 @@ export class AuthorRepository {
         return this.repository.save(author);
     }
 
+
+    async findAll(): Promise<Author[]> {
+        return this.repository.find(); // Retorna todos os autores
+    }
+
     async deleteAuthor(id: number): Promise<void> {
         await this.repository.delete(id);
     }

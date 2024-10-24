@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Author } from '../../authors/entities/author.entity';
 
+
 @Entity()
 export class Book {
     @PrimaryGeneratedColumn()
@@ -11,6 +12,8 @@ export class Book {
 
     @Column()
     publicationDate: Date;
+
+
 
     @ManyToOne(() => Author, (author) => author.books)
     author: Author;

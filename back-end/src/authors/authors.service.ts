@@ -12,7 +12,7 @@ export class AuthorsService {
   }
 
   findAll() {
-    return `This action returns all authors`;
+    return this.authorRepository.findAll();
   }
 
   findOne(id: number) {
