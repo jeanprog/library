@@ -3,11 +3,11 @@ import { Author } from '../entities/author';
 import { Book } from '../entities/book';
 
 export default interface BookGateway {
-  createAuthor(Author: Author): Observable<Book>;
+  createBook(Book: Book): Observable<Book>;
 
   listAllbooks(): Observable<Book[]>;
 
-  listBooksOfAuthors(): Observable<Book[]>;
+  listBooksOfAuthors(id: number): Observable<Book[]>;
 
   updateBook(id: number): Observable<Author>;
 
