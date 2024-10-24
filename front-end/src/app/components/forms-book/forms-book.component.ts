@@ -13,14 +13,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { Author } from '../../domain/entities/author';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Book } from '../../domain/entities/book';
 import { formatDateToYYYYMMDD } from '../../../utils/helpers';
 
 @Component({
   selector: 'app-book-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor],
+  imports: [ReactiveFormsModule, NgFor, NgIf],
   templateUrl: './forms-book.component.html',
 })
 export class BookFormComponent {
@@ -60,6 +60,8 @@ export class BookFormComponent {
         author: Number(bookData.author),
       };
       this.formSubmit.emit(formattedBookData);
+      this.bookForm.reset();
+      this.updateTemplate = false;
     }
   }
 }

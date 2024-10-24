@@ -18,7 +18,8 @@
     ></app-book-form>
 
     <app-books-list
-      (updateBooksProps)="onUpdateBook($event)"
+      (updateBooksEvent)="onUpdateBook($event)"
+      (deleteBookEvent)="deleteBooksSubmit($event)"
       [booksAuthor]="booksAuthor"
     ></app-books-list>
   </div>

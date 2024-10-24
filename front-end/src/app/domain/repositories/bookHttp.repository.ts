@@ -12,6 +12,7 @@ import { Author } from '../entities/author';
 })
 export class BooksHttpRepository implements BookGateway {
   constructor(private http: HttpClient) {}
+  private apiUrl = environment.apiUrl;
   createBook(book: Book): Observable<Book> {
     return this.http.post<Book>(this.apiUrl + 'books', book);
   }
@@ -26,7 +27,7 @@ export class BooksHttpRepository implements BookGateway {
     return this.http.patch<Book>(this.apiUrl + 'books/' + id, book);
   }
   deleteBook(id: number): Observable<void> {
-    throw new Error('Method not implemented.');
+    const sId = id.toString();
+    return this.http.delete<void>(this.apiUrl + 'books/' + sId);
   }
-  private apiUrl = environment.apiUrl;
 }

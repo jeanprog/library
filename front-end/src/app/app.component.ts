@@ -107,4 +107,13 @@ export class AppComponent {
       },
     });
   }
+
+  deleteBooksSubmit(id: number) {
+    this.bookService.deleteBook(id).subscribe({
+      next: () => {
+        console.log('não retorna nada deletei o book');
+        this.getAllbooks();
+      },
+    });
+  }
 }

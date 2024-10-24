@@ -23,6 +23,6 @@ export class BookService implements BookGateway {
     return this.bookRepository.updateBook(id, book);
   }
   deleteBook(id: number): Observable<void> {
-    throw new Error('Method not implemented.');
+    return this.bookRepository.deleteBook(id);
   }
 }

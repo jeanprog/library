@@ -10,9 +10,14 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 })
 export class BooksListComponent {
   @Input() booksAuthor: Book[] = [];
-  @Output() updateBooksProps = new EventEmitter<any>();
+  @Output() updateBooksEvent = new EventEmitter<any>();
+  @Output() deleteBookEvent = new EventEmitter<any>();
 
   updateBook(book: Book) {
-    this.updateBooksProps.emit(book);
+    this.updateBooksEvent.emit(book);
+  }
+
+  deleteBook(id: number) {
+    this.deleteBookEvent.emit(id);
   }
 }

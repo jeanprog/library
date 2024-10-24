@@ -6,9 +6,7 @@ import { BookRepository } from './repositories/books.repository';
 
 @Injectable()
 export class BooksService {
-
-  constructor(private readonly bookRepository: BookRepository) { }
-
+  constructor(private readonly bookRepository: BookRepository) {}
 
   async createBook(createBookDto: CreateBookDto): Promise<Book> {
     return this.bookRepository.createBook(createBookDto);
@@ -32,6 +30,6 @@ export class BooksService {
     return this.bookRepository.updateBook(id, updateBookDto);
   }
   remove(id: number) {
-    return `This action removes a #${id} book`;
+    return this.bookRepository.deleteBook(id);
   }
 }
