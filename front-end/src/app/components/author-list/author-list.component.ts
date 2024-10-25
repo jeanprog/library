@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Author } from '../../domain/entities/author';
 import { NgFor, NgIf, NgClass } from '@angular/common';
+import { formatDateToDDMMYYYY } from '../../../utils/helpers';
 
 @Component({
   selector: 'app-author-list',
@@ -31,6 +32,10 @@ export class AuthorListComponent {
   onEventUpdateAuthor(author: Author) {
     console.log(author, 'no evento component');
     this.authorEvent.emit(author);
+  }
+  formatDate(date: string) {
+    const dateformat = formatDateToDDMMYYYY(new Date(date));
+    return dateformat;
   }
 
   deleteAuthor(id: number) {
