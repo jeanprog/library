@@ -19,6 +19,7 @@ export class FormsAuthorComponent {
   authorForm: FormGroup;
   @Input() author: Author | null = null;
   @Output() formSubmit = new EventEmitter<any>();
+  updateTemplate: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.authorForm = this.fb.group({
@@ -30,10 +31,10 @@ export class FormsAuthorComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['author'] && this.author) {
       this.updateFormWithAuthor(this.author);
+      this.updateTemplate = true;
     }
   }
 
-  // Atualiza o formulário com os novos valores
   updateFormWithAuthor(author: Author) {
     this.authorForm.patchValue({
       name: author.name,
@@ -45,7 +46,8 @@ export class FormsAuthorComponent {
     if (this.authorForm.valid) {
       console.log('Form submitted:', this.authorForm.value);
       this.formSubmit.emit(this.authorForm.value);
-      // Aqui você pode chamar um serviço para enviar os dados
     }
+    this.authorForm.reset();
+    this.updateTemplate = false;
   }
 }

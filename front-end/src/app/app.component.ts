@@ -66,6 +66,7 @@ export class AppComponent {
       this.authorService.updateAuthor(id, authorFormated).subscribe({
         next: (result: Author) => {
           console.log('alterado com sucesso', result);
+          this.listAllAuthor();
           this.getAllbooks();
         },
       });
@@ -74,6 +75,7 @@ export class AppComponent {
         next: (result: Author) => {
           console.log('cadastrado com sucesso', result);
           this.getAllbooks();
+          this.listAllAuthor();
         },
       });
     }
@@ -139,8 +141,22 @@ export class AppComponent {
   deleteBooksSubmit(id: number) {
     this.bookService.deleteBook(id).subscribe({
       next: () => {
-        console.log('não retorna nada deletei o book');
+        console.log('deletei o book');
         this.getAllbooks();
+      },
+    });
+  }
+  deleteAuthorSubmit(id: number) {
+    this.authorService.deleteAuthor(id).subscribe({
+      next: () => {
+        console.log('deletei o authors');
+        this.listAllAuthor();
+      },
+      error: (error) => {
+        console.log(
+          'voce não pode deletar pois existe historicos de livros associados a este author',
+          error
+        );
       },
     });
   }

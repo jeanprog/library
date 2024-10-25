@@ -14,6 +14,7 @@ export class AuthorListComponent {
   @Output() authorSelected = new EventEmitter<number>();
   @Output() reload = new EventEmitter<any>();
   @Output() authorEvent = new EventEmitter<Author>();
+  @Output() deleteAuthorEvent = new EventEmitter<any>();
 
   toggleSelection(index: number, authorID: number) {
     this.selectedIndex = this.selectedIndex === index ? null : index;
@@ -30,5 +31,9 @@ export class AuthorListComponent {
   onEventUpdateAuthor(author: Author) {
     console.log(author, 'no evento component');
     this.authorEvent.emit(author);
+  }
+
+  deleteAuthor(id: number) {
+    this.deleteAuthorEvent.emit(id);
   }
 }
