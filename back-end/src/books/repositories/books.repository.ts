@@ -12,28 +12,25 @@ export class BookRepository {
         private readonly repository: Repository<Book>,
     ) { }
 
+
+    async booksOfAuthor(authorId: number): Promise<Book[]> {
+        return this.repository.find({ where: { author: { id: authorId } }, relations: ['author'] });
+    }
+
     async createBook(createBookDto: CreateBookDto): Promise<Book> {
         const book = this.repository.create(createBookDto);
         return this.repository.save(book);
     }
-
     async updateBook(id: number, updateBookDto: UpdateBookDto): Promise<Book> {
-        // 1. Recupera o livro existente
-        const book = await this.repository.findOne({ where: { id } });
-        if (!book) {
-            throw new Error('Book not found');
-        }
-
-        // 2. Atualiza as propriedades do livro
-        Object.assign(book, updateBookDto);
-
-        // 3. Salva as alterações no banco de dados
-        return this.repository.save(book); // Isso faz um UPDATE no banco
+        await this.repository.update(id, updateBookDto);
+        return this.findOne(id);
+    }
+    async findOne(id: number): Promise<Book> {
+        return this.repository.findOne({ where: { id }, relations: ['author'] });
     }
 
-
     async findAll(): Promise<Book[]> {
-        return this.repository.find({ relations: ['author'] }); // Retorna todos os livros com os autores
+        return this.repository.find({ relations: ['author'] });
     }
 
     async deleteBook(id: number): Promise<void> {

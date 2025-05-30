@@ -1,0 +1,32 @@
+<div
+  *ngFor="let author of authors; let i = index"
+  [ngClass]="{
+    'bg-blue-800 text-white': selectedIndex === i,
+    'bg-white text-slate-600': selectedIndex !== i
+  }"
+  class="p-4 bg-white border border-zinc-300 rounded-lg shadow-md mb-4 hover:bg-blue-800 hover:text-slate-300"
+>
+  <div class="cursor-pointer" (click)="toggleSelection(i, author.id)">
+    <p class="text-lg font-semibold">
+      <strong>Name:</strong> {{ author.name }}
+    </p>
+    <p class="">
+      <strong class="">Birth Date:</strong>
+      {{ formatDate(author.birthDate) }}
+    </p>
+  </div>
+  <div class="flex gap-2">
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-[12px]"
+      (click)="onEventUpdateAuthor(author)"
+    >
+      Editar
+    </button>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-[12px]"
+      (click)="deleteAuthor(author.id)"
+    >
+      Remover
+    </button>
+  </div>
+</div>
